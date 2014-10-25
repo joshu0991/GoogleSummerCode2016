@@ -15,6 +15,11 @@ int main(int argc, char** argv)
 	{
 		mS.setPort(argv[1]);
 	}
+	else
+	{
+		perror("Error the server was not provided a port");
+		exit(0);
+	}
 
 	std::cout << "Running on port " << mS.getPort() << std::endl;
 
