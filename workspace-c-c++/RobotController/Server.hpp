@@ -21,10 +21,13 @@ class mainServer
 	int status;
 	struct addrinfo host_info;       // The struct that getaddrinfo() fills up with data.
 	struct addrinfo *host_info_list; // Pointer to the to the linked list of host_info's.
+	int socketfd;
 public:
 	void setPort(char*);
 	int getPort();
 	int listen();
+	//handle input write to file input and send to client received data.
+	int handleInput();
 };
 
 
