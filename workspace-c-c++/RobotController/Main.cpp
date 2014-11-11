@@ -9,11 +9,18 @@
 
 int main(int argc, char** argv)
 {
-	mainServer mS;
+	//mainServer mS;
 	std::cout << "Starting server " << std::endl;
+	mainServer* mS;
+	mS = new mainServer();
+	if(mS == 0)
+	{
+		std::cout << "Starting server failed" << std::endl;
+	}
+
 	if(argc == 2)
 	{
-		mS.setPort(argv[1]);
+		mS->setPort(argv[1]);
 	}
 	else
 	{
@@ -21,7 +28,11 @@ int main(int argc, char** argv)
 		exit(0);
 	}
 
-	std::cout << "Running on port " << mS.getPort() << std::endl;
-
+	std::cout << "Running on port " << mS->getPort() << std::endl;
+	//while(true)
+	//{
+	//	mS->listen();
+	//}
+	//delete(mS);
 	return 0;
 }
