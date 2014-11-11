@@ -33,6 +33,8 @@ int main(int argc, char** argv)
 	//{
 	//	mS->listen();
 	//}
-	//delete(mS);
+	delete(mS);
+	mS = 0;
+	std::cout << "Memory deleted" << std::endl;
 	return 0;
 }

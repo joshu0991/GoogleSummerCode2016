@@ -9,14 +9,24 @@
 
 mainServer::mainServer() : port("5555")
 {
-	 //int socket(int domain, int type, int protocol);
+	 	//int socket(int domain, int type, int protocol);
+		struct addrinfo host_info;       // The struct that getaddrinfo() fills up with data.
+		struct addrinfo *host_info_list; // Pointer to the to the linked list of host_info's.
 
-		socketfd = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol);
-		if(socketfd < 0) std::cout << "Error creating socket " << std::endl;
-		host_info.ai_flags = AI_PASSIVE;
-		memset(&host_info, 0, sizeof host_info);
+
+		std::cout << "Gathering host information" << std::endl;
+ 		memset(&host_info, 0, sizeof host_info);
 		host_info.ai_family = AF_UNSPEC;     // IP version not specified. Can be both.
 		host_info.ai_socktype = SOCK_STREAM; // Use SOCK_STREAM for TCP or SOCK_DGRAM for UDP.
+
+		std::cout << "Setting socket" << std::endl;
+		socketfd = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol);
+		std::cout << "Socket set successfully" << std::endl;
+		if(socketfd <= 0) std::cout << "Error creating socket " << std::endl;
+		host_info.ai_flags = AI_PASSIVE;
+		std::cout << "socket discriptor set" << std::endl;
+
+
 		status = getaddrinfo(NULL, port, &host_info, &host_info_list);
 		std::cout << "Binding socket... " << std::endl;
 		int yes = 1;

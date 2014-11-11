@@ -20,8 +20,6 @@ class mainServer
 {
 	char* port;
 	int status;
-	struct addrinfo host_info;       // The struct that getaddrinfo() fills up with data.
-	struct addrinfo *host_info_list; // Pointer to the to the linked list of host_info's.
 	int socketfd;
 	int new_sd;
 
