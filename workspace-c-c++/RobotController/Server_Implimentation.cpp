@@ -18,16 +18,14 @@ mainServer::mainServer() : port("5555")
  		memset(&host_info, 0, sizeof host_info);
 		host_info.ai_family = AF_UNSPEC;     // IP version not specified. Can be both.
 		host_info.ai_socktype = SOCK_STREAM; // Use SOCK_STREAM for TCP or SOCK_DGRAM for UDP.
+		host_info.ai_flags = AI_PASSIVE;     // IP Wild
+		status = getaddrinfo(NULL, port, &host_info, &host_info_list);
 
 		std::cout << "Setting socket" << std::endl;
 		socketfd = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol);
-		std::cout << "Socket set successfully" << std::endl;
 		if(socketfd <= 0) std::cout << "Error creating socket " << std::endl;
-		host_info.ai_flags = AI_PASSIVE;
 		std::cout << "socket discriptor set" << std::endl;
 
-
-		status = getaddrinfo(NULL, port, &host_info, &host_info_list);
 		std::cout << "Binding socket... " << std::endl;
 		int yes = 1;
 		status = setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));//check if in use
